@@ -16,29 +16,29 @@ namespace Farm.Silo
 
         static void Main(string[] args)
         {
-            // // TODO replace with your connection string
-            // const string connectionString = "YOUR_CONNECTION_STRING_HERE";
-            // silo = new SiloHostBuilder()
-            //     .Configure<ClusterOptions>(options =>
-            //     {
-            //         options.ClusterId = "orleans-docker";
-            //         options.ServiceId = "AspNetSampleApp";
-            //     })
-            //     .UseAzureStorageClustering(options => options.ConnectionString = connectionString)
-            //     .ConfigureEndpoints(siloPort: 11111, gatewayPort: 30000)
-            //     .ConfigureApplicationParts(parts => parts.AddApplicationPart(typeof(ValueGrain).Assembly).WithReferences())
-            //     .ConfigureLogging(builder => builder.SetMinimumLevel(LogLevel.Warning).AddConsole())
-            //     .Build();
+            // TODO replace with your connection string
+            const string connectionString = "YOUR_CONNECTION_STRING_HERE";
+            silo = new SiloHostBuilder()
+                .Configure<ClusterOptions>(options =>
+                {
+                    options.ClusterId = "orleans-docker";
+                    options.ServiceId = "AspNetSampleApp";
+                })
+                // .UseAzureStorageClustering(options => options.ConnectionString = connectionString)
+                .ConfigureEndpoints(siloPort: 11111, gatewayPort: 30000)
+                .ConfigureApplicationParts(parts => parts.AddApplicationPart(typeof(ValueGrain).Assembly).WithReferences())
+                .ConfigureLogging(builder => builder.SetMinimumLevel(LogLevel.Warning).AddConsole())
+                .Build();
 
-            // Task.Run(StartSilo);
+            Task.Run(StartSilo);
 
-            // AssemblyLoadContext.Default.Unloading += context =>
-            // {
-            //     Task.Run(StopSilo);
-            //     siloStopped.WaitOne();
-            // };
+            AssemblyLoadContext.Default.Unloading += context =>
+            {
+                Task.Run(StopSilo);
+                siloStopped.WaitOne();
+            };
 
-            // siloStopped.WaitOne();
+            siloStopped.WaitOne();
         }
 
         private static async Task StartSilo()

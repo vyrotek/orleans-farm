@@ -2,44 +2,43 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Farm.Core;
 using Microsoft.AspNetCore.Mvc;
+using Orleans;
 
 namespace Farm.API.Controllers
 {
     [Route("api/[controller]")]
-    [ApiController]
-    public class ValuesController : ControllerBase
+    public class ValuesController : Controller
     {
+        private IClusterClient client;
+        
+        public ValuesController(IClusterClient client)
+        {
+            this.client = client;
+        }
+
         // GET api/values
         [HttpGet]
-        public ActionResult<IEnumerable<string>> Get()
+        public IEnumerable<string> Get()
         {
             return new string[] { "value1", "value2" };
         }
 
         // GET api/values/5
         [HttpGet("{id}")]
-        public ActionResult<string> Get(int id)
+        public async Task<string> Get(int id)
         {
-            return "value";
-        }
-
-        // POST api/values
-        [HttpPost]
-        public void Post([FromBody] string value)
-        {
+            var grain = this.client.GetGrain<IValueGrain>(id);
+            return await grain.GetValue();
         }
 
         // PUT api/values/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPost("{id}")]
+        public async Task Post(int id, [FromBody]string value)
         {
-        }
-
-        // DELETE api/values/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
+            var grain = this.client.GetGrain<IValueGrain>(id);
+            await grain.SetValue(value);
         }
     }
 }
