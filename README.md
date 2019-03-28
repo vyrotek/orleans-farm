@@ -9,3 +9,6 @@ Save value to Grain: POST http://localhost:5000/api/values/1 "Vyrotek"
 Get value from Grain: GET http://localhost:5000/api/values/1
 
 Silo Dashboard: http://localhost:8080
+
+# Docker
+TODO
