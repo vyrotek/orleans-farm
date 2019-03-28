@@ -3,8 +3,8 @@ using System.Threading.Tasks;
 using System.Runtime.Loader;
 using System.Threading;
 using Orleans;
-using Orleans.Hosting;
 using Orleans.Configuration;
+using Orleans.Hosting;
 using Microsoft.Extensions.Logging;
 
 namespace Farm.Silo
@@ -16,15 +16,15 @@ namespace Farm.Silo
 
         static void Main(string[] args)
         {
-            // TODO replace with your connection string
-            const string connectionString = "YOUR_CONNECTION_STRING_HERE";
+            const string connectionString = "<StorageKey>";
             silo = new SiloHostBuilder()
                 .Configure<ClusterOptions>(options =>
                 {
-                    options.ClusterId = "orleans-docker";
-                    options.ServiceId = "AspNetSampleApp";
+                    options.ClusterId = "orleans-farm";
+                    options.ServiceId = "FarmApp";
                 })
-                // .UseAzureStorageClustering(options => options.ConnectionString = connectionString)
+                .UseDashboard(options => { })
+                .UseAzureStorageClustering(options => options.ConnectionString = connectionString)
                 .ConfigureEndpoints(siloPort: 11111, gatewayPort: 30000)
                 .ConfigureApplicationParts(parts => parts.AddApplicationPart(typeof(ValueGrain).Assembly).WithReferences())
                 .ConfigureLogging(builder => builder.SetMinimumLevel(LogLevel.Warning).AddConsole())
