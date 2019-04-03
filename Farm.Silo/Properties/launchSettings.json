@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Farm.Silo": {
+      "commandName": "Project"
+    },
+    "Docker": {
+      "commandName": "Docker"
+    }
+  }
+}

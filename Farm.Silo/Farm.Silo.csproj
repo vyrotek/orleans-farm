@@ -2,17 +2,19 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp2.2</TargetFramework>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Farm.Core\Farm.Core.csproj"/>
+    <ProjectReference Include="..\Farm.Core\Farm.Core.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.Orleans.Server" Version="2.3.0"/>
-    <PackageReference Include="Microsoft.Orleans.Core.Abstractions" Version="2.3.0"/>
-    <PackageReference Include="Microsoft.Orleans.CodeGenerator.MSBuild" Version="2.3.0"/>
-    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="2.2.0"/>
-    <PackageReference Include="Microsoft.Orleans.Clustering.AzureStorage" Version="2.3.0"/>
-    <PackageReference Include="OrleansDashboard" Version="2.3.1"/>
-    <PackageReference Include="CoreCLR-NCalc" Version="2.2.51"/>
+    <PackageReference Include="Microsoft.Orleans.Server" Version="2.3.0" />
+    <PackageReference Include="Microsoft.Orleans.Core.Abstractions" Version="2.3.0" />
+    <PackageReference Include="Microsoft.Orleans.CodeGenerator.MSBuild" Version="2.3.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Orleans.Clustering.AzureStorage" Version="2.3.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.4.10" />
+    <PackageReference Include="OrleansDashboard" Version="2.3.1" />
+    <PackageReference Include="CoreCLR-NCalc" Version="2.2.51" />
   </ItemGroup>
 </Project>
