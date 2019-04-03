@@ -1,0 +1,15 @@
+version: '3.4'
+
+services:
+  farm.silo:
+    image: ${DOCKER_REGISTRY-}farmsilo
+    build:
+      context: .
+      dockerfile: Farm.Silo/Dockerfile
+
+  farm.api:
+    image: ${DOCKER_REGISTRY-}farmapi
+    build:
+      context: .
+      dockerfile: Farm.API/Dockerfile
+
